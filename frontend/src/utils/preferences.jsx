@@ -50,6 +50,8 @@ const DEFAULT_PREFERENCES = {
       lastSleep: false,     // time since last sleep
       lastDiaper: false,    // time since last diaper change
       currentTime: false,   // wall clock
+      fontScale: 1,         // text + icon size multiplier (1 = default 14px)
+      color: "#ffffff",     // text color
     },
   },
 

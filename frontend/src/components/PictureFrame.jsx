@@ -105,6 +105,8 @@ export default function PictureFrame({ photos, children = [], onWake }) {
   );
 }
 
+const OVERLAY_BASE_FONT_PX = 14;
+
 function StatusOverlay({ overlay, children }) {
   const { t } = useI18n();
   const [data, setData] = useState({ feedings: {}, sleeps: {}, changes: {}, timers: [] });
@@ -240,13 +242,19 @@ function StatusOverlay({ overlay, children }) {
     </div>
   );
 
+  const scale = Number(overlay.fontScale) > 0 ? Number(overlay.fontScale) : 1;
+  const panelStyle = {
+    fontSize: `${OVERLAY_BASE_FONT_PX * scale}px`,
+    color: overlay.color || "#ffffff",
+  };
+
   return (
     <>
-      <div className="picture-frame-status picture-frame-status-left">
+      <div className="picture-frame-status picture-frame-status-left" style={panelStyle}>
         {leftLines.map(renderLine)}
       </div>
       {rightLines.length > 0 && (
-        <div className="picture-frame-status picture-frame-status-right">
+        <div className="picture-frame-status picture-frame-status-right" style={panelStyle}>
           {rightLines.map(renderLine)}
         </div>
       )}

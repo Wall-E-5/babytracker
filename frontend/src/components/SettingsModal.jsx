@@ -290,6 +290,37 @@ export default function SettingsModal({ childId, unitSystem, children, isAdmin, 
                           </label>
                         ))}
                       </div>
+
+                      <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", marginTop: 10 }}>
+                        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--text-muted)" }}>
+                          {t("settings.overlayFontSize")}
+                          <select
+                            value={prefs.pictureFrame.overlay?.fontScale ?? 1}
+                            onChange={(e) => setPref("pictureFrame", {
+                              ...prefs.pictureFrame,
+                              overlay: { ...prefs.pictureFrame.overlay, fontScale: Number(e.target.value) },
+                            })}
+                            style={{ fontSize: 12, padding: "2px 6px" }}
+                          >
+                            <option value={1}>100%</option>
+                            <option value={1.25}>125%</option>
+                            <option value={1.5}>150%</option>
+                            <option value={2}>200%</option>
+                          </select>
+                        </label>
+                        <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--text-muted)" }}>
+                          {t("settings.overlayColor")}
+                          <input
+                            type="color"
+                            value={prefs.pictureFrame.overlay?.color || "#ffffff"}
+                            onChange={(e) => setPref("pictureFrame", {
+                              ...prefs.pictureFrame,
+                              overlay: { ...prefs.pictureFrame.overlay, color: e.target.value },
+                            })}
+                            style={{ width: 28, height: 22, padding: 0, border: "1px solid var(--border)", borderRadius: 4, cursor: "pointer", background: "transparent" }}
+                          />
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -850,22 +850,23 @@ body {
 .picture-frame-status-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 14px;
+  gap: 0.6em;
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   white-space: nowrap;
+  /* font-size + color come from the inline style on .picture-frame-status so
+     they scale together with the user's overlay preferences. */
 }
 
 /* Fixed-width icon column so text starts from the same place across items
-   regardless of the emoji's rendered width. */
+   regardless of the emoji's rendered width. Sized in em so icons scale with
+   the configured overlay font size. */
 .picture-frame-status-icon {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 20px;
-  font-size: 16px;
+  width: 1.45em;
+  font-size: 1.15em;
   flex-shrink: 0;
 }
 

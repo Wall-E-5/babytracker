@@ -115,6 +115,8 @@ const en = {
   "settings.overlayLastDiaper": "Last diaper",
   "settings.overlayTimers": "Active timers",
   "settings.overlayCurrentTime": "Current time",
+  "settings.overlayFontSize": "Text size",
+  "settings.overlayColor": "Text color",
 
   // Forms
   "form.save": "Save",
@@ -713,6 +715,8 @@ const es = {
   "settings.overlayLastDiaper": "Último pañal",
   "settings.overlayTimers": "Cronómetros activos",
   "settings.overlayCurrentTime": "Hora actual",
+  "settings.overlayFontSize": "Tamaño del texto",
+  "settings.overlayColor": "Color del texto",
   "form.save": "Guardar",
   "form.saving": "Guardando...",
   "form.update": "Actualizar",
@@ -1196,6 +1200,8 @@ const da = {
   "settings.overlayLastDiaper": "Sidste ble",
   "settings.overlayTimers": "Aktive timere",
   "settings.overlayCurrentTime": "Klokken nu",
+  "settings.overlayFontSize": "Tekststørrelse",
+  "settings.overlayColor": "Tekstfarve",
 
   // Forms
   "form.save": "Gem",
