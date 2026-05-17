@@ -294,19 +294,24 @@ export default function SettingsModal({ childId, unitSystem, children, isAdmin, 
                       <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap", marginTop: 10 }}>
                         <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--text-muted)" }}>
                           {t("settings.overlayFontSize")}
-                          <select
-                            value={prefs.pictureFrame.overlay?.fontScale ?? 1}
-                            onChange={(e) => setPref("pictureFrame", {
-                              ...prefs.pictureFrame,
-                              overlay: { ...prefs.pictureFrame.overlay, fontScale: Number(e.target.value) },
-                            })}
-                            style={{ fontSize: 12, padding: "2px 6px" }}
-                          >
-                            <option value={1}>100%</option>
-                            <option value={1.25}>125%</option>
-                            <option value={1.5}>150%</option>
-                            <option value={2}>200%</option>
-                          </select>
+                          <input
+                            type="number"
+                            min={50}
+                            max={400}
+                            step={5}
+                            value={Math.round(((prefs.pictureFrame.overlay?.fontScale ?? 1) * 100))}
+                            onChange={(e) => {
+                              const pct = Number(e.target.value);
+                              if (!Number.isFinite(pct)) return;
+                              const clamped = Math.max(50, Math.min(400, pct));
+                              setPref("pictureFrame", {
+                                ...prefs.pictureFrame,
+                                overlay: { ...prefs.pictureFrame.overlay, fontScale: clamped / 100 },
+                              });
+                            }}
+                            style={{ fontSize: 12, padding: "2px 6px", width: 64 }}
+                          />
+                          <span style={{ fontSize: 12 }}>%</span>
                         </label>
                         <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, color: "var(--text-muted)" }}>
                           {t("settings.overlayColor")}
