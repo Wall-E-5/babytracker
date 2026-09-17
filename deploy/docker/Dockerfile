@@ -1,17 +1,21 @@
 # Stage 1: Build frontend
 # Pinned to BUILDPLATFORM: the output is plain JS/CSS/HTML with no architecture
 # of its own, so running npm under QEMU once per target arch was pure waste.
-FROM --platform=$BUILDPLATFORM node:22-alpine AS frontend-builder
+FROM --platform=$BUILDPLATFORM node:26-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json* ./
 RUN npm ci
+# Vite 8.x permits every Rolldown 1.2.x release, but 1.2.8 has a native
+# binding enum mismatch on Node 26 Alpine. Keep Vite unchanged and use the
+# compatible Rolldown patch only in this Linux build environment.
+RUN npm install --no-save --package-lock=false rolldown@1.2.4
 COPY frontend/ ./
 RUN npm run build
 
 # Stage 2: Build Go binary
 # Also pinned to BUILDPLATFORM and cross-compiled via GOOS/GOARCH - with
 # CGO_ENABLED=0 Go cross-compiles natively, so this needs no emulation either.
-FROM --platform=$BUILDPLATFORM golang:1.26-alpine AS go-builder
+FROM --platform=$BUILDPLATFORM golang:1.27-alpine AS go-builder
 # VERSION is injected into the binary for the Settings → Server → Updates
 # display. Set it from CI, docker-compose build args, or HA add-on build.
 ARG VERSION=dev
